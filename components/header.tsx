@@ -1,13 +1,10 @@
 'use client';
 
 import * as React from "react"
-import { useState } from "react";
 import Link from "next/link"
 import { Button } from "./ui/button";
 import Banner from "./banner"
 import { Menu } from "lucide-react";
-import * as NavigationMenuPrimitive from "@radix-ui/react-navigation-menu"
-
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -16,8 +13,18 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu"
-import { useRouter } from "next/navigation";
 
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerPortal,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer"
 
 export default function Header() {
   return (
@@ -29,7 +36,7 @@ export default function Header() {
         </Link>
 
         <nav>
-          <Menu color="black" size={24} className="flex md:hidden" />
+          <NavDrawer />
           <ul className="hidden md:flex flex-row items-center gap-2">
             <li>
               <Link href="/" className="nav-link">Inicio</Link>
@@ -57,7 +64,7 @@ export default function Header() {
 }
 
 const NavMenu = () => {
-const handleLinkClick = () => {
+  const handleLinkClick = () => {
     // Let the Radix internal menu close after click
     setTimeout(() => {
       const trigger = document.activeElement as HTMLElement
@@ -66,7 +73,7 @@ const handleLinkClick = () => {
   }
 
   return (
-  <NavigationMenu>
+    <NavigationMenu>
       <NavigationMenuList>
         <NavigationMenuItem>
           <NavigationMenuTrigger>
@@ -115,5 +122,44 @@ const handleLinkClick = () => {
   )
 }
 
-
+const NavDrawer = () => {
+  return (
+    <Drawer direction="right">
+      <DrawerTrigger>
+        <Menu color="black" size={24} className="flex md:hidden" />
+      </DrawerTrigger>
+      <DrawerContent>
+        <DrawerHeader className="flex flex-row items-center justify-between">
+          <div></div>
+          <DrawerTitle>Menu</DrawerTitle>
+          <Menu color="black" size={24} className="flex md:hidden" />
+        </DrawerHeader>
+        <div>
+          <ul className="flex flex-col items-center gap-2">
+            <li>
+              <Link href="/" className="nav-link">Inicio</Link>
+            </li>
+            <li>
+              <Link href="/sobre" className="nav-link">Sobre Mi</Link>
+            </li>
+            <li>
+              <Link href="/cursos-grupales" className="nav-link">Cursos Grupales</Link>
+            </li>
+            <li>
+              <Link href="/cursos-para-la-unt" className="nav-link">Cursos Para la UNT</Link>
+            </li>
+            <li>
+              <Link href="/clases-individuales" className="nav-link">Clases Individuales</Link>
+            </li>
+            <li>
+              <Button asChild variant="yellow" className="w-fit">
+                <Link href="/contacto" >Contacto</Link>
+              </Button>
+            </li>
+          </ul>
+        </div>
+      </DrawerContent>
+    </Drawer>
+  )
+}
 
