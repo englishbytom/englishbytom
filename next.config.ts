@@ -14,7 +14,7 @@ const nextConfig = {
     unoptimized: true // needed if you use next/image
   },
   // Optional: basePath if deploying to a subfolder
-  basePath: '/englishbytom',
+  // basePath: '/englishbytom',
 }
 
 module.exports = nextConfig
