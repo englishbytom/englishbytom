@@ -1,6 +1,7 @@
 "use client"
 
 import Image from 'next/image'
+import BannerImg from './banner.jpg'
 import Link from 'next/link';
 import { usePathname } from 'next/navigation'
 import { Button } from './ui/button';
@@ -57,7 +58,7 @@ export default function Banner() {
   return (
     <div className="relative flex responsive-container px-2! md:px-8! h-fit items-center justify-center">
       <Image
-        src="/banner.jpg"
+        src={BannerImg}
         style={{ objectFit: "cover" }}
         className="opacity-15 rounded-md"
         sizes="100vw"
