@@ -4,10 +4,6 @@ import mammoth from "mammoth";
 import Link from "next/link";
 import slugify from "slugify";
 
-interface TagPageProps {
-  params: { tag: string };
-}
-
 export async function generateStaticParams() {
   const contentDir = path.join(process.cwd(), "content");
   const files = fs.readdirSync(contentDir).filter(f => f.endsWith(".docx"));
@@ -28,7 +24,7 @@ export async function generateStaticParams() {
   return Array.from(tagsSet).map(tag => ({ tag }));
 }
 
-export default async function TagPage({ params }: TagPageProps) {
+export default async function TagPage({ params }: { params: { tag: string } }) {
   const { tag } = params;
   const contentDir = path.join(process.cwd(), "content");
   const files = fs.readdirSync(contentDir).filter(f => f.endsWith(".docx"));
