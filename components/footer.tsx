@@ -31,7 +31,7 @@ export default function Footer() {
               alt="English by Tom Youtube channel"
             />
           </a> */}
-            <a href="https://www.facebook.com/profile.php?id=61578772386344" rel="noopener noreferrer" target="_blank">
+            <a href="https://www.facebook.com/englishbytom" rel="noopener noreferrer" target="_blank">
               <Image
                 src={FacebookIcon}
                 height="32"
