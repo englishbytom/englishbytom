@@ -1,31 +1,19 @@
-import fs from "fs";
-import path from "path";
-import Link from "next/link";
-import slugify from "slugify";
+import BlogCard from "@/components/blogcard";
+import { getPostDataBySlug, getAllPostSlugs } from "@/lib/getPostData";
 
-export default function BlogIndex() {
-  const contentDir = path.join(process.cwd(), "content");
-  const files = fs.readdirSync(contentDir);
-
-  const posts = files
-    .filter((file) => file.endsWith(".docx"))
-    .map((file) => {
-      const name = file.replace(/\.docx$/, "");
-      return {
-        slug: slugify(name, { lower: true }),
-        title: name,
-      };
-    });
+export default async function BlogIndex() {
+  const slugs = getAllPostSlugs();
+  const posts = await Promise.all(
+    slugs.map(({ slug }) => getPostDataBySlug(slug))
+  );
 
   return (
     <section className="section">
       <h3 className="h3">Más recientes</h3>
-      <ul>
-        {posts.map(({ slug, title }) => (
-          <li key={slug} className="my-2">
-            <Link href={`/blog/${slug}`}>{title}</Link>
-          </li>
-        ))}
+      <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {posts.map(post =>
+          <BlogCard post={post} key={post} />
+        )}
       </ul>
     </section>
   );

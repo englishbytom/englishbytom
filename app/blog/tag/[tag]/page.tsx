@@ -1,67 +1,27 @@
-import fs from "fs";
-import path from "path";
-import mammoth from "mammoth";
-import Link from "next/link";
-import slugify from "slugify";
+import { getAllTags, getPostsByTag } from "@/lib/getPostData";
+import BlogCard from "@/components/blogcard";
 
 export async function generateStaticParams() {
-  const contentDir = path.join(process.cwd(), "content");
-  const files = fs.readdirSync(contentDir).filter(f => f.endsWith(".docx"));
-
-  const tagsSet = new Set<string>();
-
-  for (const file of files) {
-    const filePath = path.join(contentDir, file);
-    const buffer = fs.readFileSync(filePath);
-    const { value: text } = await mammoth.extractRawText({ buffer });
-    const lines = text.split("\n").map(l => l.trim()).filter(Boolean);
-
-    // assuming the tag is on line 4 (index 3)
-    const tagLine = lines[3] || "";
-    tagsSet.add(slugify(tagLine, { lower: true }));
-  }
-
-  return Array.from(tagsSet).map(tag => ({ tag }));
+  return getAllTags();
 }
 
-export default async function TagPage({ params }: any) {
-  const { tag } = params
-  const contentDir = path.join(process.cwd(), "content");
-  const files = fs.readdirSync(contentDir).filter(f => f.endsWith(".docx"));
+export default async function TagPage(props: { params: Promise<{ tag: string }> }) {
+  const params = await props.params;
+  const tagParam = params.tag;
+  const matchingPosts = await getPostsByTag(tagParam);
 
-  // Filter posts by tag
-  const posts = [];
-
-  for (const file of files) {
-    const filePath = path.join(contentDir, file);
-    const buffer = fs.readFileSync(filePath);
-    const { value: text } = await mammoth.extractRawText({ buffer });
-    const lines = text.split("\n").map(l => l.trim()).filter(Boolean);
-    const title = lines[0] || "Untitled";
-    const fileTag = slugify(lines[3] || "", { lower: true });
-
-    if (fileTag === tag) {
-      posts.push({
-        slug: slugify(file.replace(/\.docx$/, ""), { lower: true }),
-        title,
-      });
-    }
-  }
-
-  if (posts.length === 0) {
-    return <p>No posts found for tag "{tag}"</p>;
-  }
+  // Display original tag (with accents) from first matched post or fallback to slug
+  const displayTag = matchingPosts.length > 0 ? matchingPosts[0].tag : tagParam;
 
   return (
-    <main className="max-w-3xl mx-auto p-4">
-      <h1>Posts tagged "{tag}"</h1>
-      <ul>
-        {posts.map(({ slug, title }) => (
-          <li key={slug}>
-            <Link href={`/blog/${slug}`}>{title}</Link>
-          </li>
+    <section className="section">
+      <h3 className="h3">Categoria: {displayTag}</h3>
+      {matchingPosts.length === 0 && <p>No posts found for this tag.</p>}
+      <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {matchingPosts.map(post => (
+          <BlogCard post={post} key={post.slug} />
         ))}
       </ul>
-    </main>
+    </section>
   );
 }
