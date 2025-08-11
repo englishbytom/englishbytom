@@ -3,22 +3,31 @@
 import Image from 'next/image'
 import BannerImg from './banner.jpg'
 import Link from 'next/link';
-import { usePathname } from 'next/navigation'
 import { Button } from './ui/button';
+import { usePathname } from "next/navigation";
+import { useTranslations } from 'next-intl';
 
 export default function Banner() {
 
+  const t = useTranslations('Banner');
+  const pathname = usePathname();
+
+  // Strip locale from path
+  const segments = pathname.split("/");
+  const pathWithoutLocale = "/" + segments.slice(2).join("/");
+  const normalizedPath = pathWithoutLocale === "/" ? "/" : pathWithoutLocale;
+
   type BannerContent = {
-    title: string;
+    title: any;
     subtitle: string;
     buttonText: string | null;
   };
 
   const bannerContentByPath: Record<string, BannerContent> = {
     "/": {
-      title: "Lográ tus objetivos de inglés",
-      subtitle: "Ya seas estudiante o profesional, estoy para ayudarte a avanzar",
-      buttonText: "Consultame"
+      title: t('home.title'),
+      subtitle: t('home.subtitle'),
+      buttonText: t('home.button')
     },
     "/sobre": {
       title: "Tom Frame",
@@ -58,20 +67,17 @@ export default function Banner() {
     },
   };
 
-  function getBannerContent(pathname: string) {
-    if (bannerContentByPath[pathname]) {
-      return bannerContentByPath[pathname];
+  function getBannerContent(path: string) {
+    if (bannerContentByPath[path]) {
+      return bannerContentByPath[path];
     }
-    if (pathname.startsWith("/blog/") || pathname === "/blog") {
+    if (path.startsWith("/blog/") || path === "/blog") {
       return bannerContentByPath["/blog/*"];
     }
     return bannerContentByPath.default;
   }
 
-  const pathname = usePathname();
-  const bannerData = getBannerContent(pathname);
-
-  const { title, subtitle, buttonText } = bannerData;
+  const { title, subtitle, buttonText } = getBannerContent(normalizedPath);
 
   return (
     <div className="relative flex responsive-container px-2! md:px-8! h-fit items-center justify-center">

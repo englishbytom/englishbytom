@@ -1,0 +1,13 @@
+{
+  "Banner": {
+    "home": {
+      "title": "Lográ tus objetivos de inglés",
+      "subtitle": "Ya seas estudiante o profesional, estoy para ayudarte a avanzar",
+      "button": "Consultame"
+    }
+  },
+  "HomePage": {
+    "title": "Hello world!",
+    "about": "Go to the about page"
+  }
+}

@@ -28,16 +28,11 @@ export default function Header() {
   return (
     <div className="w-full flex flex-col items-center">
       <header className="flex responsive-container py-4 justify-between items-center">
-
-        <Link href="/" className="p-2">
-          <h6>English by Tom</h6>
-        </Link>
-
         <nav>
           <NavDrawer />
           <ul className="hidden md:flex flex-row items-center gap-2">
             <li>
-              <Link href="/" className="nav-link">Inicio</Link>
+              <Link href="/" className="p-4 font-medium">English by Tom</Link>
             </li>
             <li>
               <Link href="/sobre" className="nav-link">Sobre Mi</Link>
@@ -48,13 +43,11 @@ export default function Header() {
             <li>
               <NavMenu />
             </li>
-            <li>
-              <Button asChild variant="yellow" className="w-fit">
-                <Link href="/contacto" >Contacto</Link>
-              </Button>
-            </li>
           </ul>
         </nav>
+        <Button asChild variant="yellow" className="w-fit">
+          <Link href="/contacto" >Contacto</Link>
+        </Button>
       </header>
       <Banner />
     </div>
@@ -75,7 +68,7 @@ const NavMenu = () => {
       <NavigationMenuList>
         <NavigationMenuItem>
           <NavigationMenuTrigger>
-            Clases Online
+            Clases
           </NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid w-[200px] p-1">
@@ -128,17 +121,18 @@ const NavDrawer = () => {
   }
 
   return (
-    <Drawer open={open} onOpenChange={setOpen} direction="right">
+    <Drawer open={open} onOpenChange={setOpen} direction="left">
       <DrawerTrigger asChild>
         <Menu color="black" size={24} className="flex md:hidden" />
       </DrawerTrigger>
       <DrawerContent>
         <DrawerHeader className="flex flex-row items-center justify-between">
-          <div className="w-[30px]" />
-          <DrawerTitle>Menu</DrawerTitle>
+          
           <DrawerClose className="flex size-[30px] items-center justify-center">
             <Menu color="black" size={24} />
           </DrawerClose>
+          <DrawerTitle>Menu</DrawerTitle>
+          <div className="w-[30px]" />
         </DrawerHeader>
         <div>
           <ul className="flex flex-col items-center gap-4">
