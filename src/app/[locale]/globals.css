@@ -26,7 +26,7 @@ h1 {
 }
 
 .h3 {
-  @apply text-[#334155] font-medium text-xl
+  @apply text-[#334155] font-medium text-xl text-center
 }
 
 .image-overlay-container {

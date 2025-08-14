@@ -1,22 +1,27 @@
 "use client";
 
-import FAQ from "./index";
-import { useLocale } from "next-intl";
 import { useState, useEffect } from "react";
-import { FAQItem } from "./index";
+import FAQ from ".";
+import { useLocale } from "next-intl";
+import { FAQItem } from ".";
 
 export default function LocalizedFAQ() {
   const locale = useLocale();
-  const [items, setItems] = useState<FAQItem[] | null>(null);
+  const [faqData, setFaqData] = useState<{
+    title: string;
+    items: FAQItem[];
+  } | null>(null);
 
   useEffect(() => {
-    import(`./content/${locale}.mdx`)
-      .then((mod) => setItems(mod.items))
-      .catch(() => setItems([]));
+    import(`./content/${locale}.mdx`).then((module) => {
+      setFaqData({
+        title: module.title, // get the exported title from MDX
+        items: module.items, // get the exported items array
+      });
+    });
   }, [locale]);
 
-  if (items === null) return <p>Loading FAQs...</p>;
-  if (items.length === 0) return <p>No FAQ items found.</p>;
+  if (!faqData) return null; // or a loading skeleton
 
-  return <FAQ items={items} />;
+  return <FAQ title={faqData.title} items={faqData.items} />;
 }

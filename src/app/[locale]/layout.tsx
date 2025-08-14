@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
-// import Nav from "@/components/nav";
 import LocalizedNav from "@/components/nav/localized";
 import Footer from "@/components/footer";
-import { NextIntlClientProvider, hasLocale } from 'next-intl';
-import { notFound } from 'next/navigation';
+import { NextIntlClientProvider, hasLocale } from "next-intl";
+import { notFound } from "next/navigation";
 import { routing } from "@/src/i18n/routing";
 
 import "./globals.css";
@@ -21,7 +20,7 @@ export const metadata: Metadata = {
 
 export default async function LocaleLayout({
   children,
-  params
+  params,
 }: {
   children: React.ReactNode;
   params: Promise<{ locale: string }>;
@@ -40,7 +39,9 @@ export default async function LocaleLayout({
       <body className="flex flex-col items-center">
         <NextIntlClientProvider>
           <LocalizedNav />
-          <main className="responsive-container flex flex-col justify-start gap-y-8">{children}</main>
+          <main className="responsive-container flex flex-col justify-start gap-y-8">
+            {children}
+          </main>
           <Footer />
         </NextIntlClientProvider>
       </body>
