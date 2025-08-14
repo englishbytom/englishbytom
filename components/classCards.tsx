@@ -79,7 +79,7 @@ const Card = ({
           {title_icon}
           <h4 className="prose-h4:m-4!">{title}</h4>
         </div>
-        <p>{text}</p>
+        <small>{text}</small>
         <div className="flex flex-row gap-x-2 items-center">
           {note_icon}
           <small className="text-[#5E5E5E] text-sm">{note}</small>
