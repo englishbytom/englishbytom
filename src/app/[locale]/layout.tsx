@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
-import Header from "@/components/header";
+// import Nav from "@/components/nav";
+import LocalizedNav from "@/components/nav/localized";
 import Footer from "@/components/footer";
 import { NextIntlClientProvider, hasLocale } from 'next-intl';
 import { notFound } from 'next/navigation';
@@ -38,7 +39,7 @@ export default async function LocaleLayout({
       </head>
       <body className="flex flex-col items-center">
         <NextIntlClientProvider>
-          <Header />
+          <LocalizedNav />
           <main className="responsive-container flex flex-col justify-start gap-y-8">{children}</main>
           <Footer />
         </NextIntlClientProvider>

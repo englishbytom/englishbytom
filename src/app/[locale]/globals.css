@@ -10,7 +10,7 @@ h1 {
 }
 
 .responsive-container {
-  @apply w-full px-4 max-w-full sm:max-w-full md:px-[0px] md:max-w-2xl lg:max-w-3xl xl:max-w-5xl 2xl:max-w-7xl;
+  @apply w-full px-4 max-w-full sm:max-w-full md:px-[0px] md:max-w-2xl lg:max-w-3xl xl:max-w-5xl;
 }
 
 .shadcn-navigation-menu-link {
@@ -18,7 +18,7 @@ h1 {
 }
 
 .nav-link {
-  @apply py-2 px-4 rounded-md hover:bg-accent focus:bg-accent disabled:pointer-events-none disabled:opacity-50 data-[state=open]:hover:bg-accent data-[state=open]:text-accent-foreground data-[state=open]:focus:bg-accent data-[state=open]:bg-accent/50 focus-visible:ring-ring/50 outline-none transition-[color,box-shadow] focus-visible:ring-[3px]
+  @apply cursor-pointer py-2 px-4 rounded-md hover:bg-accent focus:bg-accent disabled:pointer-events-none disabled:opacity-50 data-[state=open]:hover:bg-accent data-[state=open]:text-accent-foreground data-[state=open]:focus:bg-accent data-[state=open]:bg-accent/50 focus-visible:ring-ring/50 outline-none transition-[color,box-shadow] focus-visible:ring-[3px]
 }
 
 .section {
