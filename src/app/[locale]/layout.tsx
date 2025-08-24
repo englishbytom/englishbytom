@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import LocalizedNav from "@/components/nav/localized";
 import Footer from "@/components/footer";
-import { NextIntlClientProvider } from "next-intl";
-// import { notFound } from "next/navigation";
-// import { routing } from "@/src/i18n/routing";
+import { NextIntlClientProvider, hasLocale } from "next-intl";
+import { notFound } from "next/navigation";
+import { routing } from "@/src/i18n/routing";
 
 import "./globals.css";
 
@@ -31,9 +31,9 @@ export default async function LocaleLayout({
 }) {
   // Ensure that the incoming `locale` is valid
   const { locale } = await params;
-  // if (!hasLocale(routing.locales, locale)) {
-  //   notFound();
-  // }
+  if (!hasLocale(routing.locales, locale)) {
+    notFound();
+  }
 
   return (
     <html lang={locale} className={`font-sans ${roboto.className}`}>
