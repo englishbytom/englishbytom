@@ -24,7 +24,6 @@ import HCaptcha from "@hcaptcha/react-hcaptcha";
 import useWeb3Forms from "@web3forms/react";
 import { useState } from "react";
 
-
 type FormValues = {
   firstName: string;
   lastName: string;
@@ -37,7 +36,7 @@ type FormValues = {
 
 export type ContactFormProps = {
   title: string;
-  placeholders: { firstName: string; lastName: string; email: string; };
+  placeholders: { firstName: string; lastName: string; email: string };
   selectOptions: {
     class: { value: string; label: string }[];
     level: { value: string; label: string }[];
@@ -90,12 +89,12 @@ export default function ContactForm(props: ContactFormProps) {
     form.setValue("h-captcha-response", token, { shouldValidate: true });
 
   return (
-<div className="flex flex-col gap-4! w-full sm:max-w-full md:max-w-2xl lg:max-w-3xl self-center pb-18">
+    <div className="flex flex-col gap-4! w-full sm:max-w-full md:max-w-2xl lg:max-w-3xl self-center pb-18">
       <h2>{props.title}</h2>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(handleSubmit)}
-          className="border p-4 grid grid-cols-1 sm:grid-cols-2 gap-4 w-full"
+          className="px-[10px] md:border sm:p-4 grid grid-cols-1 sm:grid-cols-2 gap-4 w-full"
         >
           {/* Text Inputs */}
           <FormField
@@ -120,10 +119,7 @@ export default function ContactForm(props: ContactFormProps) {
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <Input
-                    placeholder={props.placeholders.lastName}
-                    {...field}
-                  />
+                  <Input placeholder={props.placeholders.lastName} {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>

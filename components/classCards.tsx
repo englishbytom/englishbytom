@@ -27,7 +27,7 @@ const cardData = [
     id: "individual",
     link: "/classes/individual",
     title: "Individual Classes",
-    text: "I offer individual classes for all levels, from beginners to advanced. Classes are fully tailored to your goals: whether it's improving your conversation skills, preparing for an exam, practicing job interviews, writing professional emails, or improving ...",
+    text: "I offer individual classes for all levels, from beginners to advanced. Classes are fully tailored to your goals: whether it's improving your conversation skills, preparing for an exam, practicing job interviews, writing professional emails, or improving your vocabulary specific to your field (business, law, medicine, etc.).",
     title_icon: <User color="black" size={24} />,
     note_icon: <CalendarCheck2 color="#5E5E5E" size={16} />,
     note: "Flexible schedule",
@@ -79,13 +79,13 @@ const Card = ({
   note: string;
 }) => {
   return (
-    <div className="flex flex-col bg-primary-card rounded-md px-4 py-4 gap-4! w-full sm:max-w-full md:max-w-2xl lg:max-w-3xl self-center gap-y-4 justify-between">
+    <div className="flex flex-col bg-gray-100 border-1 rounded-md px-4 py-4 gap-4! w-full sm:max-w-full md:max-w-2xl lg:max-w-3xl self-center gap-y-4 justify-between">
       <div className="flex flex-col gap-y-2">
         <div className="flex flex-row gap-x-2 prose-h4:m-0!">
           {title_icon}
           <h4>{title}</h4>
         </div>
-        <p>{text}</p>
+        <p className="line-clamp-3">{text}</p>
         <div className="flex flex-row gap-x-2 items-center">
           {note_icon}
           <small className="text-[#5E5E5E] text-sm">{note}</small>

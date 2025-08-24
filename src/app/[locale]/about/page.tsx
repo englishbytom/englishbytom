@@ -1,7 +1,7 @@
 export default function About() {
   return (
     <>
-      <div className="flex flex-col gap-4! w-full sm:max-w-full md:max-w-2xl lg:max-w-3xl self-center pb-18">
+      <div className="flex flex-col gap-4! w-full px-[10px] sm:max-w-full md:px-0 md:max-w-2xl lg:max-w-3xl self-center pb-18">
         <h2>About me</h2>
         <p>
           I am a certified English teacher, born in the United States, where I

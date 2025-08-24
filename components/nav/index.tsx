@@ -14,7 +14,8 @@ import Link from "next/link";
 
 export default function Nav({ items }: any) {
   return (
-    <header className="flex container-fluid py-5 justify-between items-center">
+    <div className="bg-primary-card w-full flex flex-col items-center">
+    <header className="flex container-fluid py-5 justify-between items-center ">
       <Link href="/" className="font-shantell text-md">
         English by Tom
       </Link>
@@ -39,6 +40,7 @@ export default function Nav({ items }: any) {
         </Drawer>
       </nav>
     </header>
+    </div>
   );
 }
 
